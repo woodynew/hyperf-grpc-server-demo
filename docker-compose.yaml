@@ -1,0 +1,21 @@
+version: "3.6"
+services:
+  hyperf1:
+    image: hyperf/hyperf:8.1-alpine-v3.15-swoole
+    container_name: hyperf1
+    ports:  #端口映射
+      - "9501:9501"
+      - "9503:9503"
+    networks:
+      - mynet
+    volumes:
+      - ./:/data/project/hyperf_grpc_server_demo
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    privileged: true  #特殊权限
+    stdin_open: true  #打开标准输入
+    tty: true  #模拟伪终端
+networks:
+  #自定义网络
+  mynet:
+    driver: bridge
